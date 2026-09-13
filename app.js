@@ -60,6 +60,13 @@ $('#editor').addEventListener('cancel',e=>{e.preventDefault();closeDialog();});$
 for(const d of [$('#editor'),$('#lightbox')])d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom){d.id==='editor'?closeDialog():closeLightbox();}}});
 $$('nav a').forEach(a=>a.addEventListener('click',()=>{$$('nav a').forEach(v=>v.classList.toggle('active',v===a));}));
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){$$('nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id));}}),{rootMargin:'-15% 0px -65% 0px'});['home','anniversaries','memories'].forEach(id=>observer.observe(document.getElementById(id)));
+const motionReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!motionReduced){
+const revealItems=$$('.poetry-strip,.section-heading,.anniversary-grid,.memory-toolbar,.memory-grid,.closing');
+revealItems.forEach(item=>item.classList.add('motion-reveal'));
+const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);}}),{threshold:.08,rootMargin:'0px 0px -8%'});
+revealItems.forEach(item=>revealObserver.observe(item));
+}
 renderSettings();renderEvents();renderMemories();let lastDay=C.localDate();setInterval(()=>{updateCounter();if(lastDay!==C.localDate()){lastDay=C.localDate();renderEvents();}},1000);
 MemoryStore.open().then(async()=>{dbReady=true;await reloadMedia();}).catch(()=>toast('浏览器存储未能打开。请通过启动脚本访问，或允许本站使用存储。'));
 
