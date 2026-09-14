@@ -16,8 +16,9 @@
     const s=b.settings;if(!str(s.name1,20)||!s.name1.trim()||!str(s.name2,20)||!s.name2.trim()||!validDate(s.start)||daysBetween(s.start)<0||!str(s.quote,120))throw new Error('备份中的情侣信息不完整');
     if(b.events.length>1000||b.memories.length>2000)throw new Error('备份内容过多');
     const ids=new Set();for(const e of b.events){if(!str(e.id,100)||ids.has(e.id)||!str(e.title,60)||!e.title.trim()||!validDate(e.date)||typeof e.annual!=='boolean')throw new Error('备份中的纪念日格式有误');ids.add(e.id);}
-    ids.clear();for(const m of b.memories){if(!str(m.id,100)||ids.has(m.id)||!str(m.title,100)||!str(m.note,500)||!str(m.place,60)||!validDate(m.date)||!['image','video'].includes(m.kind)||typeof m.data!=='string'||!/^data:(image\/(jpeg|png|webp|gif)|video\/(mp4|webm|ogg));base64,[A-Za-z0-9+/=]+$/.test(m.data)||!m.data.startsWith('data:'+m.kind+'/'))throw new Error('备份中的照片或视频格式有误');ids.add(m.id);}
+    ids.clear();for(const m of b.memories){if(!str(m.id,100)||ids.has(m.id)||!str(m.title,100)||!str(m.note,500)||!str(m.place,60)||!validDate(m.date)||!['image','video','text'].includes(m.kind)||typeof m.data!=='string'||!/^data:(image\/(jpeg|png|webp|gif)|video\/(mp4|webm|ogg)|text\/plain);base64,[A-Za-z0-9+/=]+$/.test(m.data)||!m.data.startsWith('data:'+m.kind+'/'))throw new Error('备份中的照片或视频格式有误');ids.add(m.id);}
     return b;
   }
   const api={validDate,parse,daysBetween,localDate,nextOccurrence,validateBackup};if(typeof module!=='undefined')module.exports=api;else root.LoveCore=api;
 })(typeof window==='undefined'?globalThis:window);
+
