@@ -56,3 +56,8 @@ dialog{border-radius:24px;background:rgba(255,252,247,.97);box-shadow:0 40px 120
 .header .header-actions .icon-button{color:#81505b!important;background:#f5e9df;border-color:#d9c4bd}
 .header .header-actions .icon-button svg{stroke:#81505b}
 .header .header-actions .icon-button:hover{color:#613943!important;background:#ead8d1;border-color:#b28a8b}
+/* Keep the key word readable against the cream hero background. */
+.hero h1 .rose-word{color:#b45f72!important;text-shadow:none}
+/* The cream hero needs a dark title for readable body text. */
+.hero h1{color:#294d78!important;text-shadow:none}
+.hero h1 .rose-word{color:#b45f72!important}
