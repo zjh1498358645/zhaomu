@@ -86,3 +86,12 @@ const refreshSharedProfile=refreshShared;
 refreshShared=async function(report=false){const result=await refreshSharedProfile(report);if(!CloudSync.configured())return result;try{const data=await CloudSync.call('getSettings');setSharedCover(data.coverUrl);return result||Boolean(data.coverUrl);}catch(err){if(report)throw err;return result;}};
 document.addEventListener('click',e=>{if(e.target.closest('[data-action="choose-cover"]')){if(!CloudSync.configured())return toast('请先连接共享空间，再更换封面');$('#cover-file').click();}});
 $('#cover-file').addEventListener('change',async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error('封面仅支持 JPG、PNG 或 WebP');if(file.size>20*1024*1024)throw new Error('封面不能超过 20MB');const frame=$('.photo-frame');frame.classList.add('is-uploading');const result=await CloudSync.uploadCover(file);setSharedCover(result.coverUrl);toast('共享封面已更新 ♡');frame.classList.remove('is-uploading');}catch(err){$('.photo-frame')?.classList.remove('is-uploading');toast(err.message==='Failed to fetch'?'云端连接失败，请检查网络或共享邀请码':(err.message||'封面上传失败'));}});
+
+function togglePreciseTime(){
+  const counter=$('.counter');
+  if(!counter||!matchMedia('(max-width: 760px)').matches)return;
+  const expanded=counter.classList.toggle('is-expanded');
+  counter.setAttribute('aria-expanded',String(expanded));
+}
+$('.counter')?.addEventListener('click',togglePreciseTime);
+$('.counter')?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();togglePreciseTime();}});
