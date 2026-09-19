@@ -44,3 +44,8 @@ dialog{border-radius:24px;background:rgba(255,252,247,.97);box-shadow:0 40px 120
 
 /* Chronological order reads left to right, then down. */
 .memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));columns:auto;gap:24px;align-items:start}.memory-grid .memory-card{margin-bottom:0;width:100%}@media(max-width:1000px){.memory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.memory-grid{grid-template-columns:1fr}}
+/* Final contrast pass for action buttons. */
+.data-buttons .button,.form-actions .button,.section-heading>.button,.header-actions .button{color:#fffaf6;background:#81505b;border-color:#81505b;text-shadow:none}
+.data-buttons .button-outline,.form-actions .button-outline{color:#613943;background:#fffaf6;border-color:#b28a8b}
+.data-buttons .button:hover,.form-actions .button:hover,.section-heading>.button:hover,.header-actions .button:hover{color:#fffaf6;background:#613943;border-color:#613943}
+.data-buttons .button-outline:hover,.form-actions .button-outline:hover{color:#613943;background:#f2e5df}
