@@ -52,3 +52,7 @@ dialog{border-radius:24px;background:rgba(255,252,247,.97);box-shadow:0 40px 120
 /* Keep the settings control legible beside the primary action. */
 .header-actions .icon-button{color:#81505b;background:#f5e9df;border:1px solid #d9c4bd}
 .header-actions .icon-button:hover{color:#613943;background:#ead8d1;border-color:#b28a8b}
+/* Override the editorial header color so the settings glyph stays visible. */
+.header .header-actions .icon-button{color:#81505b!important;background:#f5e9df;border-color:#d9c4bd}
+.header .header-actions .icon-button svg{stroke:#81505b}
+.header .header-actions .icon-button:hover{color:#613943!important;background:#ead8d1;border-color:#b28a8b}
